@@ -1,30 +1,30 @@
-import { Geist, Geist_Mono, Inter } from "next/font/google"
+import type { Metadata } from "next";
+import { Space_Grotesk } from "next/font/google";
+import { TooltipProvider } from "@/components/ui/tooltip";
+import "./globals.css";
 
-import "./globals.css"
-import { ThemeProvider } from "@/components/theme-provider"
-import { cn } from "@/lib/utils";
-
-const inter = Inter({subsets:['latin'],variable:'--font-sans'})
-
-const fontMono = Geist_Mono({
+const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
-  variable: "--font-mono",
-})
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-space-grotesk",
+  display: "swap",
+});
+
+export const metadata: Metadata = {
+  title: "GreenBreak — Touch Grass AI for Screen-Bound Developers",
+  description: "The 30-Second Outdoor Dispatcher for Screen-Bound Developers",
+};
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode
-}>) {
+}: {
+  children: React.ReactNode;
+}) {
   return (
-    <html
-      lang="en"
-      suppressHydrationWarning
-      className={cn("antialiased", fontMono.variable, "font-sans", inter.variable)}
-    >
-      <body>
-        <ThemeProvider>{children}</ThemeProvider>
+    <html lang="en" className={spaceGrotesk.variable}>
+      <body className="min-h-screen bg-[#FFFFFF] text-[#191A23] font-sans antialiased selection:bg-[#B9FF66] selection:text-[#191A23]">
+        <TooltipProvider>{children}</TooltipProvider>
       </body>
     </html>
-  )
+  );
 }
